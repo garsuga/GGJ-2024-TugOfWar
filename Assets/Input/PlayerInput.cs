@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Y"",
+                    ""type"": ""Button"",
+                    ""id"": ""06617fc2-e333-4a87-a574-720fa5f70d48"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -128,6 +137,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f22ce8c-578c-40e8-92cd-4c709ab9c0d9"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -141,6 +161,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_General_Controller_A = m_General_Controller.FindAction("A", throwIfNotFound: true);
         m_General_Controller_B = m_General_Controller.FindAction("B", throwIfNotFound: true);
         m_General_Controller_X = m_General_Controller.FindAction("X", throwIfNotFound: true);
+        m_General_Controller_Y = m_General_Controller.FindAction("Y", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_General_Controller_A;
     private readonly InputAction m_General_Controller_B;
     private readonly InputAction m_General_Controller_X;
+    private readonly InputAction m_General_Controller_Y;
     public struct General_ControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -216,6 +238,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @A => m_Wrapper.m_General_Controller_A;
         public InputAction @B => m_Wrapper.m_General_Controller_B;
         public InputAction @X => m_Wrapper.m_General_Controller_X;
+        public InputAction @Y => m_Wrapper.m_General_Controller_Y;
         public InputActionMap Get() { return m_Wrapper.m_General_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -240,6 +263,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @X.started += instance.OnX;
             @X.performed += instance.OnX;
             @X.canceled += instance.OnX;
+            @Y.started += instance.OnY;
+            @Y.performed += instance.OnY;
+            @Y.canceled += instance.OnY;
         }
 
         private void UnregisterCallbacks(IGeneral_ControllerActions instance)
@@ -259,6 +285,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @X.started -= instance.OnX;
             @X.performed -= instance.OnX;
             @X.canceled -= instance.OnX;
+            @Y.started -= instance.OnY;
+            @Y.performed -= instance.OnY;
+            @Y.canceled -= instance.OnY;
         }
 
         public void RemoveCallbacks(IGeneral_ControllerActions instance)
@@ -283,5 +312,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnA(InputAction.CallbackContext context);
         void OnB(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
+        void OnY(InputAction.CallbackContext context);
     }
 }
