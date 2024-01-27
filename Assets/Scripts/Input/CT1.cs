@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player Input")]
     private PlayerInput playerInput;
-    private Vector2 movementInput;
+
 
     // Awake is called before Start() when an object is created or when the level is loaded
     private void Awake()
@@ -41,16 +42,44 @@ public class PlayerController : MonoBehaviour
         playerInput.General_Controller.Disable();
     }
 
+    private EnumInput InterpretStickAngle(InputAction.CallbackContext context)
+    {
+        var iVec = context.ReadValue<Vector2>();
+        var angle = Vector2.Angle(Vector2.up, iVec);
+        if (angle > 315 || angle <= 45)
+        {
+            return EnumInput.Up;
+        }
+        if (angle > 225)
+        {
+            return EnumInput.Left;
+        }
+        if (angle > 135)
+        {
+            return EnumInput.Down;
+        }
+        return EnumInput.Right;
+    }
+
+    private static void EmitInput(EnumInput toEmit, object whereToSend)
+    {
+
+    }
+
+    private Action<InputAction.CallbackContext> XInputHandler = (ctx) => EmitInput(EnumInput.X, null);
+    private Action<InputAction.CallbackContext> YInputHandler = (ctx) => EmitInput(EnumInput.Y, null);
+    private Action<InputAction.CallbackContext> AInputHandler = (ctx) => EmitInput(EnumInput.A, null);
+    private Action<InputAction.CallbackContext> BInputHandler = (ctx) => EmitInput(EnumInput.B, null);
+
     private void SubscribeInputActions()
     {
         // Here we can bind our input actions to functions
-        playerInput.General_Controller.LeftStick.started += RightStickMovement;
-        playerInput.General_Controller.LeftStick.performed += RightStickMovement;
-        playerInput.General_Controller.LeftStick.canceled += RightStickMovement;
+        playerInput.General_Controller.LeftStick.performed += (ctx) => EmitInput(In(ctx));
 
-        playerInput.General_Controller.X.performed += XButtonPressed;
-        playerInput.General_Controller.A.performed += AButtonPressed;
-        playerInput.General_Controller.B.performed += BButtonPressed;
+        playerInput.General_Controller.X.performed += XInputHandler;
+        playerInput.General_Controller.A.performed += AInputHandler;
+        playerInput.General_Controller.B.performed += BInputHandler;
+        playerInput.General_Controller.Y.performed += YInputHandler;
 
 
     }
@@ -65,23 +94,10 @@ public class PlayerController : MonoBehaviour
         playerInput.General_Controller.X.performed -= XButtonPressed;
         playerInput.General_Controller.A.performed -= AButtonPressed;
         playerInput.General_Controller.B.performed -= BButtonPressed;
+        playerInput.General_Controller.Y.performed -= YButtonPressed;
+
 
     }
 
-    private void RightStickMovement(InputAction.CallbackContext context)
-    {
-        // Read in the Vector2 of our player input.
-        movementInput = context.ReadValue<Vector2>();
 
-   }
-
-    private void XButtonPressed(InputAction.CallbackContext context)
-    {
-    }
-    private void AButtonPressed(InputAction.CallbackContext context)
-    {
-    }
-    private void BButtonPressed(InputAction.CallbackContext context)
-    {
-    }
 }
