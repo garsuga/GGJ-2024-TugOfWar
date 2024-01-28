@@ -16,19 +16,19 @@ public class SpectatorSpawn : MonoBehaviour
         pulseIndex = 0;
         for(int i = 0; i < 24; i++)
         {
-            spectators[index++] = Instantiate(spectator, new Vector3(-17.25f+i*1.5f, -0.6f, 5f), Quaternion.identity, this.gameObject.transform);
+            spectators[index++] = Instantiate(spectator, new Vector3(-17.25f+i*1.5f, this.gameObject.transform.position.y-0.5f, this.gameObject.transform.position.z-3f), Quaternion.identity, this.gameObject.transform);
         }
         for(int i = 0; i < 23; i++)
         {
-            spectators[index++] = Instantiate(spectator, new Vector3(-16.5f+i*1.5f, 0.3f, 5.5f), Quaternion.identity, this.gameObject.transform);
+            spectators[index++] = Instantiate(spectator, new Vector3(-16.5f+i*1.5f, this.gameObject.transform.position.y+0.2f, this.gameObject.transform.position.z-2f), Quaternion.identity, this.gameObject.transform);
         }
         for(int i = 0; i < 22; i++)
         {
-            spectators[index++] = Instantiate(spectator, new Vector3(-15.75f+i*1.5f, 1f, 6f), Quaternion.identity, this.gameObject.transform);
+            spectators[index++] = Instantiate(spectator, new Vector3(-15.75f+i*1.5f, this.gameObject.transform.position.y+0.9f, this.gameObject.transform.position.z-1f), Quaternion.identity, this.gameObject.transform);
         }
         for(int i = 0; i < 21; i++)
         {
-            spectators[index++] = Instantiate(spectator, new Vector3(-15f+i*1.5f, 1.7f, 6.5f), Quaternion.identity, this.gameObject.transform);
+            spectators[index++] = Instantiate(spectator, new Vector3(-15f+i*1.5f, this.gameObject.transform.position.y+1.6f, this.gameObject.transform.position.z), Quaternion.identity, this.gameObject.transform);
         }
     }
 

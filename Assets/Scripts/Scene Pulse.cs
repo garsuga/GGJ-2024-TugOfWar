@@ -8,11 +8,13 @@ public class ScenePulse : MonoBehaviour
     public GameObject bleachers;
     public GameObject stage;
     public GameObject background;
-    private int backgroundIndex;
+    public GameObject player1;
+    public GameObject mainCamera;
+    public PlayableAsset[] cameraAnims;
+    private int cameraState;
     // Start is called before the first frame update
     void Start()
     {
-        backgroundIndex = 0;
     }
 
     // Update is called once per frame
@@ -20,31 +22,34 @@ public class ScenePulse : MonoBehaviour
     {
         
     }
-
-    [SerializeField]
     public void BleacherPulse()
     {
         bleachers.GetComponent<PlayableDirector>().Play();
     }
-
-    [SerializeField]
     public void StagePulse()
     {
         stage.GetComponent<PlayableDirector>().Play();
     }
-
-    [SerializeField]
     public void BackgroundPulse()
     {
-        if(backgroundIndex == 0)
+        background.GetComponent<PlayableDirector>().Play(); 
+    }
+    public void CameraPulse()
+    {
+        if(cameraState == 0)
         {
-            background.GetComponent<PlayableDirector>().Play();
-            backgroundIndex = 1;
+            mainCamera.GetComponent<PlayableDirector>().Play(cameraAnims[0]);
+            cameraState = 1;
         }
         else
         {
-            backgroundIndex = 0;
+           mainCamera.GetComponent<PlayableDirector>().Play(cameraAnims[1]); 
+           cameraState = 0;
         }
-        
     }
+    public void Player1Pulse()
+    {
+        player1.GetComponent<Player>().ChangeSprite();
+    }
+
 }
