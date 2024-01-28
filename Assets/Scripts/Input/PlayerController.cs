@@ -9,7 +9,7 @@ using UnityEngine.InputSystem.XInput;
 
 public class ControlEvent : UnityEvent<EnumInput> {}
 
-public class PlayerController : MonoBehaviour, PlayerInput.IGeneral_ControllerActions
+public class PlayerController : MonoBehaviour, TugOfWarControls.IGeneral_ControllerActions
 {
     [Header("Controls Event")]
     [SerializeField]
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, PlayerInput.IGeneral_ControllerAc
         // Set up our player actions in code
         // This class name is based on what you named your .inputactions asset
         //playerInput = new PlayerInput();
+
     }
 
     private void OnEnable()
@@ -36,62 +37,120 @@ public class PlayerController : MonoBehaviour, PlayerInput.IGeneral_ControllerAc
     }
 
     [SerializeField]
+    public void OnUp(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.Up, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnDown(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.Down, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnLeft(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.Left, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnRight(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.Right, controlEvent);
+    }
+
+    [SerializeField]
     public void OnX(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(EnumInput.X, controlEvent);
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.X, controlEvent);
     }
 
     [SerializeField]
     public void OnY(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(EnumInput.Y, controlEvent);
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.Y, controlEvent);
     }
 
     [SerializeField]
     public void OnA(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(EnumInput.A, controlEvent);
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.A, controlEvent);
     }
 
     [SerializeField]
     public void OnB(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(EnumInput.B, controlEvent);
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.B, controlEvent);
     }
 
     [SerializeField]
     public void OnLeftTrigger(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(EnumInput.Left, controlEvent);
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.LeftTrigger, controlEvent);
     }
 
     [SerializeField]
+    public void OnRightTrigger(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.RightTrigger, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnRightBumper(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.RightBumper, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnLeftBumper(InputAction.CallbackContext ctx) {
+        if(ctx.phase == InputActionPhase.Started)
+            EmitInput(EnumInput.LeftBumper, controlEvent);
+    }
+
+    private bool stickWasFarEnoughLast = false;
+    private EnumInput? lastStickAngle = null;
+    [SerializeField]
     public void OnLeftStick(InputAction.CallbackContext ctx) {
-        PlayerController.EmitInput(PlayerController.InterpretStickAngle(ctx), controlEvent);
+        var stickVec = ctx.ReadValue<Vector2>();
+        var farEnough = false;
+        if(stickVec.magnitude > .55) {
+            farEnough = true;
+        }
+        EnumInput? angle = InterpretStickAngle(stickVec);
+        if(farEnough && (angle != lastStickAngle || (!stickWasFarEnoughLast))) {
+            lastStickAngle = angle;
+            EmitInput((EnumInput)angle, controlEvent);
+        }
+        stickWasFarEnoughLast = farEnough;
     }
 
     [SerializeField]
     public void OnTest(InputAction.CallbackContext ctx) {
         print("TEST");
     }
-
-    private static EnumInput InterpretStickAngle(InputAction.CallbackContext context)
+    private EnumInput? InterpretStickAngle(Vector2 iVec)
     {
-        var iVec = context.ReadValue<Vector2>();
-        var angle = Vector2.Angle(Vector2.up, iVec);
+        var angle = (Vector2.SignedAngle(iVec, Vector2.up) + 360) % 360f;
+        //print(angle);
+        EnumInput nextStickAngle;
         if (angle > 315 || angle <= 45)
         {
-            return EnumInput.Up;
-        }
-        if (angle > 225)
+            nextStickAngle = EnumInput.Up;
+        } else if (angle > 225)
         {
-            return EnumInput.Left;
-        }
-        if (angle > 135)
+            nextStickAngle = EnumInput.Left;
+        } else if (angle > 135)
         {
-            return EnumInput.Down;
+            nextStickAngle = EnumInput.Down;
+        } else {
+            nextStickAngle = EnumInput.Right;
         }
-        return EnumInput.Right;
+        return nextStickAngle;
     }
 
-    private static void EmitInput(EnumInput toEmit, ControlEvent eventParent)
+    private void EmitInput(EnumInput toEmit, ControlEvent eventParent)
     {
-        print(toEmit);
         eventParent.Invoke(toEmit);
     }
 }

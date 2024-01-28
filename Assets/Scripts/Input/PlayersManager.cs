@@ -8,12 +8,14 @@ using UnityEngine.InputSystem;
 [Serializable]
 public class PlayersManager : MonoBehaviour
 {
+    private GameObject[] players = new GameObject[]{null, null};
+
     [SerializeField]
-    public GameObject playerPrefab;
+    public PlayerInputManager playerInputManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -22,17 +24,27 @@ public class PlayersManager : MonoBehaviour
 
     }
 
-    [SerializeField]
-    public void OnPlayerJoined() {
-        print("Add Player");
-        //var newPlayer = Instantiate(playerPrefab, gameObject.transform);
-        //var playerController = newPlayer.GetComponent<PlayerController>();
-        //var input = newPlayer.GetComponent<PlayerInput>();
-        //input.General_Controller.AddCallbacks(playerController);
+    void HandleInput(EnumInput input, int ctrl) {
+        print("received " + input + " from " + ctrl);
     }
 
     [SerializeField]
-    public void OnPlayerLeft() {
-;;
+    public void OnPlayerJoined(PlayerInput input) {
+        int idx = 0;
+        if(players[idx] != null) {
+            idx++;
+        }
+        players[idx] = input.gameObject;
+        input.gameObject.GetComponent<PlayerController>().controlEvent.AddListener((i) => HandleInput(i, idx));
+    }
+
+    [SerializeField]
+    public void OnPlayerLeft(PlayerInput input) {
+        for(int i = 0; i < players.Length; i++) {
+            if(players[i] == input.gameObject) {
+                players[i] = null;
+            }
+        }
+        input.gameObject.GetComponent<PlayerController>().controlEvent.RemoveAllListeners();
     }
 }
