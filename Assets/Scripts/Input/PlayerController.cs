@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour, TugOfWarControls.IGeneral_Control
     [SerializeField]
     public ControlEvent controlEvent = new ControlEvent();
 
+    
+
     // Awake is called before Start() when an object is created or when the level is loaded
     private void Awake()
     {

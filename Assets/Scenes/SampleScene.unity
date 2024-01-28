@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &132995039
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1433661454570706415, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_Name
+      value: ResponseBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967405005140648230, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
 --- !u!1 &264369850
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +285,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c881f2d28e64f5c87fa7d4e10f8e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInputManager: {fileID: 264369852}
+  playerControlEntryEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 307925407}
+        m_TargetAssemblyTypeName: ControlIconManager, Assembly-CSharp
+        m_MethodName: ControlReceived
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &307925407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+  m_PrefabInstance: {fileID: 132995039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e21d016bb3a41709ba5bd7c762d8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,3 +537,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 264369851}
+  - {fileID: 132995039}
