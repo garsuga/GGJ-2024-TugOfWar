@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Test"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7b76d3e-9be1-4f08-a2e5-61655673773a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -89,7 +98,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""LeftStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -100,7 +109,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""LeftTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -108,10 +117,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""86795a4a-ddb9-4e50-8b1d-54caf1f9e8a4"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""A"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -119,10 +128,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5759c97c-d984-41b9-8794-e61018c59871"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""B"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -130,10 +139,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b9a52035-7c5a-43ed-bdcf-9261295baf79"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""X"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -141,18 +150,51 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2f22ce8c-578c-40e8-92cd-4c709ab9c0d9"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a95bb581-803a-4f75-b403-de600a38c0c8"",
+                    ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Y"",
+                    ""action"": ""Test"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<WebGLGamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // General_Controller
         m_General_Controller = asset.FindActionMap("General_Controller", throwIfNotFound: true);
@@ -162,6 +204,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_General_Controller_B = m_General_Controller.FindAction("B", throwIfNotFound: true);
         m_General_Controller_X = m_General_Controller.FindAction("X", throwIfNotFound: true);
         m_General_Controller_Y = m_General_Controller.FindAction("Y", throwIfNotFound: true);
+        m_General_Controller_Test = m_General_Controller.FindAction("Test", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +272,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_General_Controller_B;
     private readonly InputAction m_General_Controller_X;
     private readonly InputAction m_General_Controller_Y;
+    private readonly InputAction m_General_Controller_Test;
     public struct General_ControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -239,6 +283,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @B => m_Wrapper.m_General_Controller_B;
         public InputAction @X => m_Wrapper.m_General_Controller_X;
         public InputAction @Y => m_Wrapper.m_General_Controller_Y;
+        public InputAction @Test => m_Wrapper.m_General_Controller_Test;
         public InputActionMap Get() { return m_Wrapper.m_General_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -266,6 +311,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Y.started += instance.OnY;
             @Y.performed += instance.OnY;
             @Y.canceled += instance.OnY;
+            @Test.started += instance.OnTest;
+            @Test.performed += instance.OnTest;
+            @Test.canceled += instance.OnTest;
         }
 
         private void UnregisterCallbacks(IGeneral_ControllerActions instance)
@@ -288,6 +336,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Y.started -= instance.OnY;
             @Y.performed -= instance.OnY;
             @Y.canceled -= instance.OnY;
+            @Test.started -= instance.OnTest;
+            @Test.performed -= instance.OnTest;
+            @Test.canceled -= instance.OnTest;
         }
 
         public void RemoveCallbacks(IGeneral_ControllerActions instance)
@@ -305,6 +356,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public General_ControllerActions @General_Controller => new General_ControllerActions(this);
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IGeneral_ControllerActions
     {
         void OnLeftStick(InputAction.CallbackContext context);
@@ -313,5 +373,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnB(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
         void OnY(InputAction.CallbackContext context);
+        void OnTest(InputAction.CallbackContext context);
     }
 }

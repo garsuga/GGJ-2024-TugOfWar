@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "c7b76d3e-9be1-4f08-a2e5-61655673773a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -67,7 +76,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "LeftStick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -78,7 +87,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "LeftTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -86,10 +95,10 @@
                 {
                     "name": "",
                     "id": "86795a4a-ddb9-4e50-8b1d-54caf1f9e8a4",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "A",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -97,10 +106,10 @@
                 {
                     "name": "",
                     "id": "5759c97c-d984-41b9-8794-e61018c59871",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "B",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -108,10 +117,10 @@
                 {
                     "name": "",
                     "id": "b9a52035-7c5a-43ed-bdcf-9261295baf79",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -119,16 +128,49 @@
                 {
                     "name": "",
                     "id": "2f22ce8c-578c-40e8-92cd-4c709ab9c0d9",
-                    "path": "<XInputController>/buttonNorth",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a95bb581-803a-4f75-b403-de600a38c0c8",
+                    "path": "<Keyboard>/anyKey",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Y",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<WebGLGamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

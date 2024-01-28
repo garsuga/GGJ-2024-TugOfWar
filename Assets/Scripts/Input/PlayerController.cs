@@ -9,21 +9,10 @@ using UnityEngine.InputSystem.XInput;
 
 public class ControlEvent : UnityEvent<EnumInput> {}
 
-public struct InputHandlers 
+public class PlayerController : MonoBehaviour, PlayerInput.IGeneral_ControllerActions
 {
-    public Action<InputAction.CallbackContext> XInputHandler;
-    public Action<InputAction.CallbackContext> YInputHandler;
-    public Action<InputAction.CallbackContext> AInputHandler;
-    public Action<InputAction.CallbackContext> BInputHandler;
-    public Action<InputAction.CallbackContext> StickInputHandler;
-}
-
-public class PlayerController : MonoBehaviour
-{
-    [Header("Player Input")]
-    public PlayerInput playerInput;
-
     [Header("Controls Event")]
+    [SerializeField]
     public ControlEvent controlEvent = new ControlEvent();
 
     // Awake is called before Start() when an object is created or when the level is loaded
@@ -31,42 +20,54 @@ public class PlayerController : MonoBehaviour
     {
         // Set up our player actions in code
         // This class name is based on what you named your .inputactions asset
-        playerInput = new PlayerInput();
+        //playerInput = new PlayerInput();
     }
 
     private void OnEnable()
     {
-        // Here we can subscribe functions to our
-        // input actions to make code occur when
-        // our input actions occur
-        SubscribeInputActions();
-
         // We need to enable our "Player" action map so Unity will listen for our input
-        playerInput.General_Controller.Enable();
+        // playerInput.General_Controller.Enable();
     }
 
     private void OnDisable()
     {
-        // Here we can unsubscribe our functions
-        // from our input actions so our object
-        // doesn't try to call functions after
-        // it is destroyed
-        UnsubscribeInputActions();
-
         // Disable our action map
-        playerInput.General_Controller.Disable();
+        // playerInput.General_Controller.Disable();
     }
 
-    private InputHandlers inputHandlers = new InputHandlers();
+    [SerializeField]
+    public void OnX(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(EnumInput.X, controlEvent);
+    }
 
-    private InputHandlers CreateInputHandlers(ControlEvent cEvent) {
-        return new InputHandlers{
-            XInputHandler = (ctx) => PlayerController.EmitInput(EnumInput.X, cEvent),
-            YInputHandler = (ctx) => PlayerController.EmitInput(EnumInput.Y, cEvent),
-            AInputHandler = (ctx) => PlayerController.EmitInput(EnumInput.A, cEvent),
-            BInputHandler = (ctx) => PlayerController.EmitInput(EnumInput.B, cEvent),
-            StickInputHandler = (ctx) => PlayerController.EmitInput(PlayerController.InterpretStickAngle(ctx), cEvent)
-        };
+    [SerializeField]
+    public void OnY(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(EnumInput.Y, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnA(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(EnumInput.A, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnB(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(EnumInput.B, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnLeftTrigger(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(EnumInput.Left, controlEvent);
+    }
+
+    [SerializeField]
+    public void OnLeftStick(InputAction.CallbackContext ctx) {
+        PlayerController.EmitInput(PlayerController.InterpretStickAngle(ctx), controlEvent);
+    }
+
+    [SerializeField]
+    public void OnTest(InputAction.CallbackContext ctx) {
+        print("TEST");
     }
 
     private static EnumInput InterpretStickAngle(InputAction.CallbackContext context)
@@ -90,38 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private static void EmitInput(EnumInput toEmit, ControlEvent eventParent)
     {
+        print(toEmit);
         eventParent.Invoke(toEmit);
     }
-
-    private void SubscribeInputActions()
-    {
-        if(inputHandlers.XInputHandler == null) {
-            inputHandlers = CreateInputHandlers(controlEvent);
-        }
-        playerInput.General_Controller.LeftStick.performed += inputHandlers.StickInputHandler;
-
-        playerInput.General_Controller.X.performed += inputHandlers.XInputHandler;
-        playerInput.General_Controller.A.performed += inputHandlers.AInputHandler;
-        playerInput.General_Controller.B.performed += inputHandlers.BInputHandler;
-        playerInput.General_Controller.Y.performed += inputHandlers.YInputHandler;
-
-
-    }
-    private void UnsubscribeInputActions()
-    {
-        if(inputHandlers.XInputHandler == null) {
-            return;
-        }
-
-        playerInput.General_Controller.LeftStick.performed -= inputHandlers.StickInputHandler;
-
-        playerInput.General_Controller.X.performed -= inputHandlers.XInputHandler;
-        playerInput.General_Controller.A.performed -= inputHandlers.AInputHandler;
-        playerInput.General_Controller.B.performed -= inputHandlers.BInputHandler;
-        playerInput.General_Controller.Y.performed -= inputHandlers.YInputHandler;
-
-
-    }
-
-
 }
