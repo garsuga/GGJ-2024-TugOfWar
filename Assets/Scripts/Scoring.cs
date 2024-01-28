@@ -19,8 +19,6 @@ public class Scoring : MonoBehaviour
     }
 
     public void HandleScoreChange(int scoreChange) {
-        print(scoreChange);
-
         player1.transform.DOMoveX(player1.transform.position.x + scoreChange * howMuchToMoveWithScore, scoreMoveDurationSeconds).SetEase(Ease.InCubic);
         player2.transform.DOMoveX(player2.transform.position.x + scoreChange * howMuchToMoveWithScore, scoreMoveDurationSeconds).SetEase(Ease.InCubic);
         mainCamera.transform.DOMoveX(mainCamera.transform.position.x + scoreChange * howMuchToMoveWithScore, scoreMoveDurationSeconds).SetEase(Ease.InCubic);
