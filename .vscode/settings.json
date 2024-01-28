@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "GGJ-2024-TugOfWar.sln"
+    "dotnet.defaultSolution": "GGJ-2024-TugOfWar NEW.sln"
 }

@@ -28,7 +28,20 @@ public class PlayersManager : MonoBehaviour
 
     }
 
-    void HandleInput(EnumInput input, int ctrl) {
+    private object currentHaptics = null;
+
+    IEnumerator DoHaptics(Gamepad device, float duration) {
+        var id = new object();
+        currentHaptics = id;
+        device.ResumeHaptics();
+        device.SetMotorSpeeds(0.123f, 0.234f);
+        yield return new WaitForSeconds(duration);
+        if(currentHaptics == id) {
+            device.SetMotorSpeeds(0f, 0f);
+        }
+    }
+
+    void HandleInput(EnumInput input, int ctrl, PlayerInput playerInput) {
         print("received " + input + " from " + ctrl);
         playerControlEntryEvent.Invoke(new PlayerControlEntry() {
             playerId = ctrl,
@@ -43,7 +56,7 @@ public class PlayersManager : MonoBehaviour
             idx++;
         }
         players[idx] = input.gameObject;
-        input.gameObject.GetComponent<PlayerController>().controlEvent.AddListener((i) => HandleInput(i, idx));
+        input.gameObject.GetComponent<PlayerController>().controlEvent.AddListener((i) => HandleInput(i, idx, input));
     }
 
     [SerializeField]

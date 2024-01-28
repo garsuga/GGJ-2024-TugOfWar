@@ -135,10 +135,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResponseBox
       objectReference: {fileID: 0}
-    - target: {fileID: 5967405005140648230, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -2
-      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: APrefab
+      value: 
+      objectReference: {fileID: 1327295706497085396, guid: 6e20dc5e123fe44ababfac9e781f961d, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: BPrefab
+      value: 
+      objectReference: {fileID: 2536975003633816741, guid: 0b4bf8e187a49463b8a8efe445fd7b40, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: XPrefab
+      value: 
+      objectReference: {fileID: 4864410556704163450, guid: 795eb88442e5244c881825ad652cf07b, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: YPrefab
+      value: 
+      objectReference: {fileID: 2758950671707981588, guid: 3dc26af00675f4d38b9e1d373a6762ad, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: LBPrefab
+      value: 
+      objectReference: {fileID: 4996950879208077488, guid: dcdb49834579b4ac8b4ef986e68edeb7, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: LTPrefab
+      value: 
+      objectReference: {fileID: 8425993681772937866, guid: 975760ce2b9a54ae3ba418fe77077bbf, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: RBPrefab
+      value: 
+      objectReference: {fileID: 4698267122313755352, guid: a3d169a745cab49f4b86b05eb46d6412, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: RTPrefab
+      value: 
+      objectReference: {fileID: 6202537575490095684, guid: 1476ca435077947aea37e578ce57b12a, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: UpPrefab
+      value: 
+      objectReference: {fileID: 5680663086585491192, guid: 551cba2fe2b3f4ed3841f33cd156cacd, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: DownPrefab
+      value: 
+      objectReference: {fileID: 4586510106671827362, guid: 1da42e047f44147d292de9a63cb0bf61, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: LeftPrefab
+      value: 
+      objectReference: {fileID: 3207761699989675344, guid: 782e1f58bbdbf4993add06f5586f00c8, type: 3}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: RightPrefab
+      value: 
+      objectReference: {fileID: 5081865198917545818, guid: 4e1983e8a743d417e976e71a194cef77, type: 3}
     - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
