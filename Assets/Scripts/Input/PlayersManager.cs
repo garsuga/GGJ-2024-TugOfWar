@@ -5,13 +5,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+public struct PlayerControlEntry {
+    public int playerId;
+    public EnumInput input;
+}
+
 [Serializable]
 public class PlayersManager : MonoBehaviour
 {
     private GameObject[] players = new GameObject[]{null, null};
 
-    [SerializeField]
-    public PlayerInputManager playerInputManager;
+    public UnityEvent<PlayerControlEntry> playerControlEntryEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,10 @@ public class PlayersManager : MonoBehaviour
 
     void HandleInput(EnumInput input, int ctrl) {
         print("received " + input + " from " + ctrl);
+        playerControlEntryEvent.Invoke(new PlayerControlEntry() {
+            playerId = ctrl,
+            input = input
+        });
     }
 
     [SerializeField]
