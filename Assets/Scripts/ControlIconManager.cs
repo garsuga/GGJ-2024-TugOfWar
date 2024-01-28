@@ -50,6 +50,13 @@ public class ControlIconManager : MonoBehaviour
     public float durationMovementTweenSeconds = .5f;
     public float timeBetweenMovementUpdateSeconds = .05f;
 
+    public AudioSource audioPlayer;
+    public AudioClip failSound;
+    public AudioClip successSound;
+    public AudioClip inputSound;
+    public AudioClip switchSound;
+    public AudioClip endSequenceSound;
+
     private Dictionary<EnumInput, GameObject> controlPrefabMapping;
     private EnumInput[] controlChord;
     private List<GameObject> controlObjects = new List<GameObject>();
@@ -137,6 +144,7 @@ public class ControlIconManager : MonoBehaviour
         Action? doFinishCycle = null;
         doFinishCycle = () => {
             latestTimerId = new object();
+            
             StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
                 entryIndex = 0;
                 foreach(var go in controlObjects) {
@@ -168,10 +176,14 @@ public class ControlIconManager : MonoBehaviour
             var scoreChange = failedPlayer == 0 ? 1 : -1;
             OnScoreChange.Invoke(scoreChange);
             doFinishCycle();
+            audioPlayer.clip = failSound;
+            audioPlayer.Play();
         };
 
         //if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
         if(true){ 
+            audioPlayer.clip = inputSound;
+            audioPlayer.Play();
             if(status.mode == ControlEntryMode.Original) {
                 controlChord[entryIndex] = entry.input;
                 // create object and animate
@@ -184,11 +196,15 @@ public class ControlIconManager : MonoBehaviour
                 entryIndex += 1;
                 if(entryIndex >= numControlsInChord) {
                     locked = true;
+                    audioPlayer.clip = endSequenceSound;
+                    audioPlayer.Play();
                     // complete with owner entry
                     entryIndex = 0;
                     latestTimerId = new object();
                     StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
                         status.mode = ControlEntryMode.Response;
+                        audioPlayer.clip = switchSound;
+                        audioPlayer.Play();
                         SwitchSidesAnimation(() => {
                             print("Done switching sides after initial input");
                             StartCoroutine(ProtectedTimer(turnTimeSeconds, () => {
@@ -204,13 +220,17 @@ public class ControlIconManager : MonoBehaviour
                     
                 }
             } else {
+                bool failed = false;
                 if(controlChord[entryIndex] == entry.input) {
                     // success, animate
                     var controller = controlObjects[entryIndex].GetComponent<ControlIconController>();
                     controller.DoSucceed();
+                    audioPlayer.clip = successSound;
+                    audioPlayer.Play();
                 } else {
                     // failure, animate
                     var controller = controlObjects[entryIndex].GetComponent<ControlIconController>();
+                    failed = true;
                     controller.DoFail();
                     doFailure();
                 }
@@ -219,6 +239,10 @@ public class ControlIconManager : MonoBehaviour
                 if(entryIndex >= numControlsInChord) {
                     // complete with response
                     // delete all game objects
+                    if(!failed){
+                        audioPlayer.clip = endSequenceSound;
+                        audioPlayer.Play();
+                    }
                     locked = true;
                     doFinishCycle.Invoke();
                 }

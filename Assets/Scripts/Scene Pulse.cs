@@ -13,26 +13,17 @@ public class ScenePulse : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public GameObject mainCamera;
-    public GameObject postProcessing;
     public PlayableAsset[] cameraAnims;
-    private int color;
     private int cameraState;
     // Start is called before the first frame update
     void Start()
     {
-        color = -180;
     }
 
     // Update is called once per frame
     void Update()
     {
-        postProcessing.GetComponent<Volume>().profile.TryGet(out ColorAdjustments p);
-        p.hueShift.value = color;
-        color+=3;
-        if(color > 180)
-        {
-            color = -180;
-        }
+        
     }
     public void BleacherPulse()
     {
