@@ -38,21 +38,21 @@ public partial class @TugOfWarControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""LeftTrigger"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""f9d5c7a0-3faa-4153-9e0f-d982372e5ed8"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""RightTrigger"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""05aade6d-1f91-4efe-bd2f-ffdd962f5262"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""A"",
