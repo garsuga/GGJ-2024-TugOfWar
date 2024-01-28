@@ -9,6 +9,7 @@ public class ScenePulse : MonoBehaviour
     public GameObject stage;
     public GameObject background;
     public GameObject player1;
+    public GameObject player2;
     public GameObject mainCamera;
     public PlayableAsset[] cameraAnims;
     private int cameraState;
@@ -50,6 +51,10 @@ public class ScenePulse : MonoBehaviour
     public void Player1Pulse()
     {
         player1.GetComponent<Player>().ChangeSprite();
+    }
+    public void Player2Pulse()
+    {
+        player2.GetComponent<Player>().ChangeSprite();
     }
 
 }
