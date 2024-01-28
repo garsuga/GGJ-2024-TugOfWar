@@ -110,6 +110,20 @@ public class ControlIconManager : MonoBehaviour
         if(locked) {
             return;
         }
+
+        Action doFailure = () => StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
+            entryIndex = 0;
+            foreach(var go in controlObjects) {
+                var controller = go.GetComponent<ControlIconController>();
+                controller.DoExit();
+                StartCoroutine(DoAfter(delayDestroyGameObjectsSeconds, () => Destroy(go)));
+            }
+            controlObjects = new List<GameObject>();
+        
+            status.mode = ControlEntryMode.Original;
+            status.ownerPlayerId = (status.ownerPlayerId + 1) % 2;
+            SwitchSidesAnimation();
+        }));
         //if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
         if(true){ 
             if(status.mode == ControlEntryMode.Original) {
@@ -141,6 +155,9 @@ public class ControlIconManager : MonoBehaviour
                     // failure, animate
                     var controller = controlObjects[entryIndex].GetComponent<ControlIconController>();
                     controller.DoFail();
+
+                    locked = true;
+                    doFailure.Invoke();
                 }
                 entryIndex += 1;
                 
@@ -148,19 +165,7 @@ public class ControlIconManager : MonoBehaviour
                     // complete with response
                     // delete all game objects
                     locked = true;
-                    StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
-                        entryIndex = 0;
-                        foreach(var go in controlObjects) {
-                            var controller = go.GetComponent<ControlIconController>();
-                            controller.DoExit();
-                            StartCoroutine(DoAfter(delayDestroyGameObjectsSeconds, () => Destroy(go)));
-                        }
-                        controlObjects = new List<GameObject>();
-                    
-                        status.mode = ControlEntryMode.Original;
-                        status.ownerPlayerId = (status.ownerPlayerId + 1) % 2;
-                        SwitchSidesAnimation();
-                    }));
+                    doFailure.Invoke();
                 }
             }
         }
