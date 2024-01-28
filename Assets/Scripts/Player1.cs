@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     public Sprite[] sprites;
     public GameObject ropeTransform;

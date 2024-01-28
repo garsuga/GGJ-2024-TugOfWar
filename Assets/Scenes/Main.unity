@@ -322,9 +322,9 @@ GameObject:
   m_Component:
   - component: {fileID: 780204853}
   - component: {fileID: 780204855}
-  - component: {fileID: 780204854}
   - component: {fileID: 780204857}
   - component: {fileID: 780204856}
+  - component: {fileID: 780204858}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -348,24 +348,6 @@ Transform:
   - {fileID: 1934790058}
   m_Father: {fileID: 1243563617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &780204854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780204852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae34594411120041b7a7916db30f240, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: f6f9413352a8e054ca46c60c20e605ef, type: 3}
-  - {fileID: 21300000, guid: cc96a2410e73e45479c39a0776cce86e, type: 3}
-  - {fileID: 21300000, guid: 78afb0357b21de847b56063e513aaa63, type: 3}
-  - {fileID: 21300000, guid: d804ed2f427bc124cb76d64d3e624573, type: 3}
-  ropeTransform: {fileID: 1934790057}
 --- !u!212 &780204855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -458,6 +440,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &780204858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780204852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae34594411120041b7a7916db30f240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: f6f9413352a8e054ca46c60c20e605ef, type: 3}
+  - {fileID: 21300000, guid: cc96a2410e73e45479c39a0776cce86e, type: 3}
+  - {fileID: 21300000, guid: 78afb0357b21de847b56063e513aaa63, type: 3}
+  - {fileID: 21300000, guid: d804ed2f427bc124cb76d64d3e624573, type: 3}
+  ropeTransform: {fileID: 1934790057}
 --- !u!1 &1054869902
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,9 +740,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1162381902}
   - component: {fileID: 1162381906}
-  - component: {fileID: 1162381905}
   - component: {fileID: 1162381904}
   - component: {fileID: 1162381903}
+  - component: {fileID: 1162381907}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -806,24 +806,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1162381905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162381901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae34594411120041b7a7916db30f240, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: f6f9413352a8e054ca46c60c20e605ef, type: 3}
-  - {fileID: 21300000, guid: cc96a2410e73e45479c39a0776cce86e, type: 3}
-  - {fileID: 21300000, guid: 78afb0357b21de847b56063e513aaa63, type: 3}
-  - {fileID: 21300000, guid: d804ed2f427bc124cb76d64d3e624573, type: 3}
-  ropeTransform: {fileID: 566202294}
 --- !u!212 &1162381906
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -876,6 +858,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1162381907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162381901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f5bd78083633d46bb736003f19d9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: f6f9413352a8e054ca46c60c20e605ef, type: 3}
+  - {fileID: 21300000, guid: cc96a2410e73e45479c39a0776cce86e, type: 3}
+  - {fileID: 21300000, guid: 78afb0357b21de847b56063e513aaa63, type: 3}
+  - {fileID: 21300000, guid: d804ed2f427bc124cb76d64d3e624573, type: 3}
+  ropeTransform: {fileID: 566202294}
 --- !u!1 &1210495176
 GameObject:
   m_ObjectHideFlags: 0
