@@ -48,6 +48,7 @@ MonoBehaviour:
   fadeInAnimation: {fileID: 11400000, guid: 048d6582ef2733e4cb9b948767859efa, type: 2}
   fadeOutAnimation: {fileID: 11400000, guid: d3f32b26625e9424f9c53adc93635da5, type: 2}
   failAnimation: {fileID: 11400000, guid: bd02811286ca97344836a692eb920a0f, type: 2}
+  successAnimation: {fileID: 11400000, guid: 6ddb3354c4558a540a744e247dd01cea, type: 2}
   director: {fileID: 8430896295618797206}
 --- !u!1 &4426867468404409372
 GameObject:
@@ -144,7 +145,7 @@ PlayableDirector:
   m_GameObject: {fileID: 4426867468404409372}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 048d6582ef2733e4cb9b948767859efa, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: bd02811286ca97344836a692eb920a0f, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -157,6 +158,12 @@ PlayableDirector:
   - key: {fileID: -2880423982037122731, guid: 048d6582ef2733e4cb9b948767859efa, type: 2}
     value: {fileID: 5550490585378298868}
   - key: {fileID: 8982235362383848883, guid: 048d6582ef2733e4cb9b948767859efa, type: 2}
+    value: {fileID: 5550490585378298868}
+  - key: {fileID: 5450511093455995300, guid: 55c59603b5d0caa41ad0fc271a4dced4, type: 2}
+    value: {fileID: 5550490585378298868}
+  - key: {fileID: -2531647516910555443, guid: 6ddb3354c4558a540a744e247dd01cea, type: 2}
+    value: {fileID: 5550490585378298868}
+  - key: {fileID: 3141745382327638037, guid: bd02811286ca97344836a692eb920a0f, type: 2}
     value: {fileID: 5550490585378298868}
   m_ExposedReferences:
     m_References: []
