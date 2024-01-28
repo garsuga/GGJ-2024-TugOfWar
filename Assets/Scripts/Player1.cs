@@ -6,7 +6,6 @@ using UnityEngine.Playables;
 public class Player1 : MonoBehaviour
 {
     public Sprite[] sprites;
-    public GameObject player2;
     public GameObject ropeTransform;
     // Start is called before the first frame update
     void Start()
