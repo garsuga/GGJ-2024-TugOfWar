@@ -80,18 +80,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numControlsInChord: 4
-  XPrefab: {fileID: 0}
-  YPrefab: {fileID: 0}
-  APrefab: {fileID: 0}
-  BPrefab: {fileID: 0}
-  UpPrefab: {fileID: 0}
-  DownPrefab: {fileID: 0}
-  LeftPrefab: {fileID: 0}
-  RightPrefab: {fileID: 0}
-  LBPrefab: {fileID: 0}
-  RBPrefab: {fileID: 0}
-  LTPrefab: {fileID: 0}
-  RTPrefab: {fileID: 0}
+  XPrefab: {fileID: 4864410556704163450, guid: 795eb88442e5244c881825ad652cf07b, type: 3}
+  YPrefab: {fileID: 2758950671707981588, guid: 3dc26af00675f4d38b9e1d373a6762ad, type: 3}
+  APrefab: {fileID: 1327295706497085396, guid: 6e20dc5e123fe44ababfac9e781f961d, type: 3}
+  BPrefab: {fileID: 2536975003633816741, guid: 0b4bf8e187a49463b8a8efe445fd7b40, type: 3}
+  UpPrefab: {fileID: 5680663086585491192, guid: 551cba2fe2b3f4ed3841f33cd156cacd, type: 3}
+  DownPrefab: {fileID: 4586510106671827362, guid: 1da42e047f44147d292de9a63cb0bf61, type: 3}
+  LeftPrefab: {fileID: 3207761699989675344, guid: 782e1f58bbdbf4993add06f5586f00c8, type: 3}
+  RightPrefab: {fileID: 5081865198917545818, guid: 4e1983e8a743d417e976e71a194cef77, type: 3}
+  LBPrefab: {fileID: 4996950879208077488, guid: dcdb49834579b4ac8b4ef986e68edeb7, type: 3}
+  RBPrefab: {fileID: 4698267122313755352, guid: a3d169a745cab49f4b86b05eb46d6412, type: 3}
+  LTPrefab: {fileID: 8425993681772937866, guid: 975760ce2b9a54ae3ba418fe77077bbf, type: 3}
+  RTPrefab: {fileID: 6202537575490095684, guid: 1476ca435077947aea37e578ce57b12a, type: 3}
   controlTransforms:
   - {fileID: 3098851749269282953}
   - {fileID: 6644680669653111186}
