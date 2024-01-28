@@ -142,10 +142,6 @@ public class PlayerController : MonoBehaviour, TugOfWarControls.IGeneral_Control
         stickWasFarEnoughLast = farEnough;
     }
 
-    [SerializeField]
-    public void OnTest(InputAction.CallbackContext ctx) {
-        print("TEST");
-    }
     private EnumInput? InterpretStickAngle(Vector2 iVec)
     {
         var angle = (Vector2.SignedAngle(iVec, Vector2.up) + 360) % 360f;

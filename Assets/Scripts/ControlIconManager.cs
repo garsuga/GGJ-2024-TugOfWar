@@ -16,6 +16,7 @@ public struct EntryStatus {
     public int ownerPlayerId;
 }
 
+
 public class ControlIconManager : MonoBehaviour
 {
 
@@ -42,6 +43,7 @@ public class ControlIconManager : MonoBehaviour
 
     public GameObject buttonLayoutParent;
 
+    public float turnTimeSeconds = 2.5f;
 
     public float delaySwitchSidesSeconds = .5f;
     public float delayDestroyGameObjectsSeconds = .25f;
@@ -95,21 +97,76 @@ public class ControlIconManager : MonoBehaviour
         action.Invoke();
     }
 
-    void SwitchSidesAnimation() {
+    void SwitchSidesAnimation(Action onComplete) {
         print("Switching Sides");
         var activePlayerId = status.mode == ControlEntryMode.Original ? status.ownerPlayerId : (status.ownerPlayerId + 1) % 2;
         var endTransform = activePlayerId == 0 ? leftTransform : rightTransform;
-        buttonLayoutParent.transform.DOMove(endTransform.position, durationMovementTweenSeconds).SetEase(Ease.InCubic).OnComplete(() => locked = false);
+        buttonLayoutParent.transform.DOMove(endTransform.position, durationMovementTweenSeconds).SetEase(Ease.InCubic).OnComplete(() => {
+            print("Side Switching Complete");
+            locked = false;
+            onComplete();
+        });
         //StartCoroutine(DoMotion(buttonLayoutParent, endTransform, durationMovementTweenSeconds, timeBetweenMovementUpdateSeconds, () => {
         //    print("Done Animating");
         //    locked = false;
         //}));
     }
 
+    private object latestTimerId = new object();
+
+    // only want callback on latest in the case of overlapping timers
+    public IEnumerator ProtectedTimer(float time, Action protectedCallback) {
+        print("Began turn timer");
+        var id = new object();
+        latestTimerId = id;
+        yield return new WaitForSeconds(time);
+        print("Turn Failed");
+        if(id == latestTimerId) {
+            protectedCallback.Invoke();
+        } else {
+            print("Timer was not current");
+        }
+    }
+
     public void ControlReceived(PlayerControlEntry entry) {
         if(locked) {
             return;
         }
+
+        Action? doFailure = null;
+        Action? doFinishCycle = null;
+        doFinishCycle = () => {
+            latestTimerId = new object();
+            StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
+                entryIndex = 0;
+                foreach(var go in controlObjects) {
+                    var controller = go.GetComponent<ControlIconController>();
+                    controller.DoExit();
+                    StartCoroutine(DoAfter(delayDestroyGameObjectsSeconds, () => Destroy(go)));
+                }
+                controlObjects = new List<GameObject>();
+            
+                status.mode = ControlEntryMode.Original;
+                status.ownerPlayerId = (status.ownerPlayerId + 1) % 2;
+                SwitchSidesAnimation(() => {
+                    print("Should start timer coroutine here");
+                    StartCoroutine(ProtectedTimer(turnTimeSeconds, () => {
+                        // out of time on original entry
+                        foreach(var go in controlObjects) {
+                            var controller = go.GetComponent<ControlIconController>();
+                            controller.DoFail();
+                        }
+                        doFailure();
+                    }));
+                });
+            }));
+        };
+
+        doFailure = () => {
+            locked = true;
+            doFinishCycle();
+        };
+
         //if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
         if(true){ 
             if(status.mode == ControlEntryMode.Original) {
@@ -126,9 +183,20 @@ public class ControlIconManager : MonoBehaviour
                     locked = true;
                     // complete with owner entry
                     entryIndex = 0;
+                    latestTimerId = new object();
                     StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
                         status.mode = ControlEntryMode.Response;
-                        SwitchSidesAnimation();
+                        SwitchSidesAnimation(() => {
+                            print("Done switching sides after initial input");
+                            StartCoroutine(ProtectedTimer(turnTimeSeconds, () => {
+                                // out of time with response
+                                for(var i = entryIndex; i < controlObjects.Count; i++) {
+                                    var controller = controlObjects[i].GetComponent<ControlIconController>();
+                                    controller.DoFail();
+                                }
+                                doFailure();
+                            }));
+                        });
                     }));
                     
                 }
@@ -141,6 +209,9 @@ public class ControlIconManager : MonoBehaviour
                     // failure, animate
                     var controller = controlObjects[entryIndex].GetComponent<ControlIconController>();
                     controller.DoFail();
+
+                    locked = true;
+                    doFinishCycle.Invoke();
                 }
                 entryIndex += 1;
                 
@@ -148,19 +219,7 @@ public class ControlIconManager : MonoBehaviour
                     // complete with response
                     // delete all game objects
                     locked = true;
-                    StartCoroutine(DoAfter(delaySwitchSidesSeconds, () => {
-                        entryIndex = 0;
-                        foreach(var go in controlObjects) {
-                            var controller = go.GetComponent<ControlIconController>();
-                            controller.DoExit();
-                            StartCoroutine(DoAfter(delayDestroyGameObjectsSeconds, () => Destroy(go)));
-                        }
-                        controlObjects = new List<GameObject>();
-                    
-                        status.mode = ControlEntryMode.Original;
-                        status.ownerPlayerId = (status.ownerPlayerId + 1) % 2;
-                        SwitchSidesAnimation();
-                    }));
+                    doFinishCycle.Invoke();
                 }
             }
         }
