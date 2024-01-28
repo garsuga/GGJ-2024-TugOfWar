@@ -86,16 +86,31 @@ public class PlayerController : MonoBehaviour, TugOfWarControls.IGeneral_Control
             EmitInput(EnumInput.B, controlEvent);
     }
 
+    private bool leftWasPressed = false;
     [SerializeField]
     public void OnLeftTrigger(InputAction.CallbackContext ctx) {
-        if(ctx.phase == InputActionPhase.Started)
+        var trVal = ctx.ReadValue<float>();
+        if(trVal < .15) {
+            leftWasPressed = false;
+        }
+        if(trVal > .45 && !leftWasPressed) {
+            leftWasPressed = true;
             EmitInput(EnumInput.LeftTrigger, controlEvent);
+        }
+            
     }
 
+    private bool rightWasPressed = false;
     [SerializeField]
     public void OnRightTrigger(InputAction.CallbackContext ctx) {
-        if(ctx.phase == InputActionPhase.Started)
+        var trVal = ctx.ReadValue<float>();
+        if(trVal < .15) {
+            rightWasPressed = false;
+        }
+        if(trVal > .45 && !rightWasPressed) {
+            rightWasPressed = true;
             EmitInput(EnumInput.RightTrigger, controlEvent);
+        }
     }
 
     [SerializeField]

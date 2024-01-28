@@ -13,6 +13,8 @@ public class ControlIconController : MonoBehaviour
     public PlayableAsset fadeOutAnimation;
     [SerializeField]
     public PlayableAsset failAnimation;
+    [SerializeField]
+    public PlayableAsset successAnimation;
 
     [SerializeField]
     public PlayableDirector director;
@@ -22,7 +24,7 @@ public class ControlIconController : MonoBehaviour
     }
 
     public void DoSucceed() {
-        
+        director.Play(successAnimation);
     }
 
     public void DoFail() {
