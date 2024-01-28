@@ -180,8 +180,8 @@ public class ControlIconManager : MonoBehaviour
             audioPlayer.Play();
         };
 
-        //if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
-        if(true){ 
+        if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
+        //if(true){ 
             audioPlayer.clip = inputSound;
             audioPlayer.Play();
             if(status.mode == ControlEntryMode.Original) {
