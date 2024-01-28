@@ -16,6 +16,10 @@ public class Scoring : MonoBehaviour
         pendingScore = 0;
     }
 
+    public void HandleScoreChange(int scoreChange) {
+        print(scoreChange);
+    }
+
     // Update is called once per frame
     void Update()
     {

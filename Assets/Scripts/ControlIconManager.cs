@@ -57,7 +57,7 @@ public class ControlIconManager : MonoBehaviour
 
     private bool locked = false;
 
-
+    public UnityEvent<int> OnScoreChange;
 
     private EntryStatus status;
 
@@ -164,6 +164,9 @@ public class ControlIconManager : MonoBehaviour
 
         doFailure = () => {
             locked = true;
+            var failedPlayer = status.mode == ControlEntryMode.Original ? status.ownerPlayerId : (status.ownerPlayerId + 1) % 2;
+            var scoreChange = failedPlayer == 0 ? -1 : 1;
+            OnScoreChange.Invoke(scoreChange);
             doFinishCycle();
         };
 
