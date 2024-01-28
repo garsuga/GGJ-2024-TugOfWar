@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using DG.Tweening;
 
 public enum ControlEntryMode {
     Original,
@@ -98,33 +99,19 @@ public class ControlIconManager : MonoBehaviour
         print("Switching Sides");
         var activePlayerId = status.mode == ControlEntryMode.Original ? status.ownerPlayerId : (status.ownerPlayerId + 1) % 2;
         var endTransform = activePlayerId == 0 ? leftTransform : rightTransform;
-        //buttonLayoutParent.transform.DOMove(endTransform.position, durationMovementTweenSeconds).SetEase(Ease.Linear).OnComplete(() => locked = false);
-        StartCoroutine(DoMotion(buttonLayoutParent, endTransform, durationMovementTweenSeconds, timeBetweenMovementUpdateSeconds, () => {
-            print("Done Animating");
-            locked = false;
-        }));
-    }
-
-    IEnumerator DoMotion(GameObject obj, Transform endTransform, float timeSeconds, float timeBetweenUpdate, Action onComplete) {
-        var direction = (endTransform.position - obj.transform.position).normalized;
-        var stepDist = (timeBetweenUpdate / timeSeconds) * (endTransform.position - obj.transform.position).magnitude;
-        var numSteps = (int)(timeSeconds / timeBetweenUpdate);
-        for(var i = 0; i < numSteps; i++) {
-            if(i == numSteps - 1) {
-                obj.transform.position = endTransform.position;
-            } else {
-                obj.transform.position = obj.transform.position + (stepDist * direction);
-            }
-            yield return new WaitForSeconds(timeBetweenUpdate);
-        }
-        onComplete.Invoke();
+        buttonLayoutParent.transform.DOMove(endTransform.position, durationMovementTweenSeconds).SetEase(Ease.InCubic).OnComplete(() => locked = false);
+        //StartCoroutine(DoMotion(buttonLayoutParent, endTransform, durationMovementTweenSeconds, timeBetweenMovementUpdateSeconds, () => {
+        //    print("Done Animating");
+        //    locked = false;
+        //}));
     }
 
     public void ControlReceived(PlayerControlEntry entry) {
         if(locked) {
             return;
         }
-        if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
+        //if((status.mode == ControlEntryMode.Original && entry.playerId == status.ownerPlayerId) || (status.mode == ControlEntryMode.Response && entry.playerId != status.ownerPlayerId)) {
+        if(true){ 
             if(status.mode == ControlEntryMode.Original) {
                 controlChord[entryIndex] = entry.input;
                 // create object and animate
