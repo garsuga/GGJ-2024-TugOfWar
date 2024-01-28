@@ -1628,8 +1628,9 @@ MonoBehaviour:
   mainCamera: {fileID: 1054869902}
   player1: {fileID: 1243563616}
   player2: {fileID: 1340142986}
+  howMuchToMoveWithScore: 1
+  scoreMoveDurationSeconds: 0.5
   score: 0
-  pendingScore: 0
 --- !u!1 &1579226252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1757,30 @@ PrefabInstance:
     - target: {fileID: 1433661454570706415, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
       propertyPath: m_Name
       value: ResponseBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1487567187}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleScoreChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Scoring, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625244429612788257, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
+      propertyPath: OnScoreChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9133890499898181577, guid: 067fbcc5c18f74cbe81931113fcca74e, type: 3}
       propertyPath: m_LocalScale.x
