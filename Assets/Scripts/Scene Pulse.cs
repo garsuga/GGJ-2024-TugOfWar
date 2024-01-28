@@ -61,11 +61,11 @@ public class ScenePulse : MonoBehaviour
     }
     public void Player1Pulse()
     {
-        player1.GetComponent<Player>().ChangeSprite();
+        player1.GetComponent<Player1>().ChangeSprite();
     }
     public void Player2Pulse()
     {
-        player2.GetComponent<Player>().ChangeSprite();
+        player2.GetComponent<Player2>().ChangeSprite();
     }
 
 }
