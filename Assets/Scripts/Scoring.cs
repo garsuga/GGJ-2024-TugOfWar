@@ -44,14 +44,14 @@ public class Scoring : MonoBehaviour
             color = -180;
         }
 
-        if (score <= -10)
+        if (score <= -5)
         {
             Win(player1);
             responseBox.SetActive(false);
             GameObject.Find("Scene Controller").SetActive(false);
             score = 0;
         }
-        else if (score >= 10)
+        else if (score >= 5)
         {
             Win(player2);
             responseBox.SetActive(false);
